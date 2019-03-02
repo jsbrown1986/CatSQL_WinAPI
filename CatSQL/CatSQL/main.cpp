@@ -1,15 +1,15 @@
-/************************************************************************************
-*																					*
-*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++							*
-*																					*
+/************************************************************************************************
+*												*
+*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++				*
+*												*
 *		This program was written as an exercise in communicating with an SQL		*
-*		server using WinAPI.														*
-*																					*
+*		server using WinAPI.								*
+*												*
 *		main.cpp - Handles all the window creation and interactions. Submits		*
-*		a query string to ServerHandler and displays the results in the				*
+*		a query string to ServerHandler and displays the results in the			*
 *		listview at the top of the screen and the control in the bottom-right.		*
-*																					*
-************************************************************************************/
+*												*
+************************************************************************************************/
 #ifndef UNICODE
 #define UNICODE
 #endif
