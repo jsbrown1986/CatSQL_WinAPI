@@ -1,14 +1,14 @@
-/************************************************************************************
-*																					*
-*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++							*
-*																					*
-*		ServerHandler.cpp - When called upon from main.cpp, ServerHandler			*
+/************************************************************************************************
+*												*									*
+*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++				*
+*												*
+*		ServerHandler.cpp - When called upon from main.cpp, ServerHandler		*
 *		allocates various connection handles, attempts a connection with the		*
 *		server name and port provided (with possible add'l information), submits	*
-*		queries, and returns the results. Frees all handles and closes the			*
-*		connection when deleted.													*
-*																					*
-************************************************************************************/
+*		queries, and returns the results. Frees all handles and closes the		*
+*		connection when deleted.							*
+*												*									*
+************************************************************************************************/
 #include "ServerHandler.h"
 
 // Constructor
