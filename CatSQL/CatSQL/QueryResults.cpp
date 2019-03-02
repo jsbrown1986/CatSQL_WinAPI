@@ -1,11 +1,11 @@
-/************************************************************************************
-*																					*
-*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++							*
-*																					*
-*		QueryResults.cpp - Stores all the result information from an SQL			*
-*		query to be displayed in main.cpp in a listview.							*
-*																					*
-************************************************************************************/
+/****************************************************************************************
+*											*
+*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++			*
+*											*
+*		QueryResults.cpp - Stores all the result information from an SQL	*
+*		query to be displayed in main.cpp in a listview.			*
+*											*
+****************************************************************************************/
 #include "QueryResults.h"
 
 // Constructor
