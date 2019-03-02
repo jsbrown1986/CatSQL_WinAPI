@@ -1,11 +1,11 @@
-/************************************************************************************
-*																					*
-*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++							*
-*																					*
-*		QueryRow.cpp - Contains a dynamic number of cells to store result			*
+/************************************************************************************************
+*												*
+*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++				*
+*												*
+*		QueryRow.cpp - Contains a dynamic number of cells to store result		*
 *		information. A QueryResults will contain a vector array of QueryRows.		*
-*																					*
-************************************************************************************/
+*												*
+************************************************************************************************/
 #include "QueryRow.h"
 
 // Constructor
