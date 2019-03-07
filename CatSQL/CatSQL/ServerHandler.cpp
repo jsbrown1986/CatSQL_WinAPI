@@ -1,6 +1,6 @@
 /************************************************************************************************
 *												*									*
-*		CatSQL by Jacob Brown (3/1/2019) - Written in C/C++				*
+*		CatSQL by Jacob Brown (3/6/2019) - Written in C/C++				*
 *												*
 *		ServerHandler.cpp - When called upon from main.cpp, ServerHandler		*
 *		allocates various connection handles, attempts a connection with the		*
@@ -161,7 +161,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 						TCHAR sqlOutput[SQL_RESULT_LEN];
 						SQLLEN ptrSqlOutput;
 						SQLGetData(sqlStmtHandle, i + 1, SQL_C_CHAR, &sqlOutput, SQL_RESULT_LEN, &ptrSqlOutput);
-						_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+						
+						// Checks if the data returned is null, sets cell to "NULL" if so.
+						if (ptrSqlOutput == SQL_NULL_DATA) {
+							_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+						} else {
+							_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+						}
 					}
 					break;
 
@@ -243,7 +249,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR sqlOutput[SQL_RESULT_LEN];
 							SQLLEN ptrSqlOutput;
 							SQLGetData(sqlStmtHandle, i + 1, SQL_WCHAR, &sqlOutput, SQL_RESULT_LEN, &ptrSqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+							
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+							}						
 						}
 						break;
 
@@ -276,6 +288,9 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 
 					case SQL_UNKNOWN_TYPE:
 					default:
+						{
+							_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+						}
 						break;
 				}
 			}
