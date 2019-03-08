@@ -153,21 +153,22 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 			QueryRow * queryRow = new QueryRow(numColumns);
 
 			for (int i = 0; i < numColumns; i++) {
+
 				switch (dataType[i]) {
 
 					case SQL_CHAR:
 					case SQL_VARCHAR:
-					{
-						TCHAR sqlOutput[SQL_RESULT_LEN];
-						SQLLEN ptrSqlOutput;
-						SQLGetData(sqlStmtHandle, i + 1, SQL_C_CHAR, &sqlOutput, SQL_RESULT_LEN, &ptrSqlOutput);
-						
-						// Checks if the data returned is null, sets cell to "NULL" if so.
-						if (ptrSqlOutput == SQL_NULL_DATA) {
-							_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
-						} else {
-							_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
-						}
+						{
+							TCHAR sqlOutput[SQL_RESULT_LEN];
+							SQLLEN ptrSqlOutput;
+							SQLGetData(sqlStmtHandle, i + 1, SQL_C_CHAR, &sqlOutput, SQL_RESULT_LEN, &ptrSqlOutput);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+							}						
 					}
 					break;
 
@@ -178,7 +179,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR sqlOutput[SQL_RESULT_LEN];
 							SQLLEN ptrSqlOutput;
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_BINARY, &sqlOutput, SQL_RESULT_LEN, &ptrSqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+							}
 						}
 						break;
 
@@ -192,7 +199,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR temp[STR_MAX];
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_DOUBLE, &sqlOutput, sizeof(SQLDOUBLE), &ptrSqlOutput);
 							swprintf(temp, STR_MAX, TEXT("%f"), sqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+							}						
 						}
 						break;
 
@@ -204,7 +217,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR temp[STR_MAX];
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_SLONG, &sqlOutput, sizeof(SQLINTEGER), &ptrSqlOutput);
 							swprintf(temp, STR_MAX, TEXT("%d"), sqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+							}						
 						}
 						break;
 
@@ -215,7 +234,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR temp[STR_MAX];
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_FLOAT, &sqlOutput, sizeof(SQLREAL), &ptrSqlOutput);
 							swprintf(temp, STR_MAX, TEXT("%f"), sqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+							}						
 						}
 						break;
 
@@ -226,7 +251,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR temp[STR_MAX];
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_SBIGINT, &sqlOutput, sizeof(SQLBIGINT), &ptrSqlOutput);
 							swprintf(temp, STR_MAX, TEXT("%d"), sqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+							}						
 						}
 						break;
 
@@ -237,7 +268,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR temp[STR_MAX];
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_STINYINT, &sqlOutput, sizeof(SQLSCHAR), &ptrSqlOutput);
 							swprintf(temp, STR_MAX, TEXT("%d"), sqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, temp);
+							}						
 						}
 						break;
 
@@ -249,13 +286,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR sqlOutput[SQL_RESULT_LEN];
 							SQLLEN ptrSqlOutput;
 							SQLGetData(sqlStmtHandle, i + 1, SQL_WCHAR, &sqlOutput, SQL_RESULT_LEN, &ptrSqlOutput);
-							
+
 							// Checks if the data returned is null, sets cell to "NULL" if so.
 							if (ptrSqlOutput == SQL_NULL_DATA) {
 								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
 							} else {
 								_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
-							}						
+							}
 						}
 						break;
 
@@ -264,7 +301,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR sqlOutput[SQL_RESULT_LEN];
 							SQLLEN ptrSqlOutput;
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_TYPE_DATE, &sqlOutput, sizeof(DATE_STRUCT), &ptrSqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+							}
 						}
 					break;
 
@@ -273,7 +316,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR sqlOutput[SQL_RESULT_LEN];
 							SQLLEN ptrSqlOutput;
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_TYPE_TIME, &sqlOutput, sizeof(TIME_STRUCT), &ptrSqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+							}
 						}
 						break;
 
@@ -282,7 +331,13 @@ BOOL ServerHandler::SubmitQuery(TCHAR * query, QueryResults * queryResults, HWND
 							TCHAR sqlOutput[SQL_RESULT_LEN];
 							SQLLEN ptrSqlOutput;
 							SQLGetData(sqlStmtHandle, i + 1, SQL_C_TYPE_TIMESTAMP, &sqlOutput, sizeof(TIMESTAMP_STRUCT), &ptrSqlOutput);
-							_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+
+							// Checks if the data returned is null, sets cell to "NULL" if so.
+							if (ptrSqlOutput == SQL_NULL_DATA) {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, TEXT("NULL"));
+							} else {
+								_tcscpy_s(queryRow->cells[i], STR_MAX, sqlOutput);
+							}
 						}
 						break;
 
